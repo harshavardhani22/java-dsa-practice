@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int[] pre = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            String s = sc.next();
+
+            char first = Character.toLowerCase(s.charAt(0));
+            char last = Character.toLowerCase(s.charAt(s.length() - 1));
+
+            int val = 0;
+
+            if ((first=='a' || first=='e' || first=='i' || first=='o' || first=='u') &&
+                (last=='a' || last=='e' || last=='i' || last=='o' || last=='u')) {
+                val = 1;
+            }
+
+            if (i == 0) {
+                pre[i] = val;
+            } else {
+                pre[i] = pre[i - 1] + val;
+            }
+        }
+
+        int q = sc.nextInt();
+
+        while (q-- > 0) {
+            int l = sc.nextInt();
+            int r = sc.nextInt();
+
+            if (l == 0) {
+                System.out.println(pre[r]);
+            } else {
+                System.out.println(pre[r] - pre[l - 1]);
+            }
+        }
+    }
+}
